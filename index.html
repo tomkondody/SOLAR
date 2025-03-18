@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AAA Interactive Solar System</title>
+    <!-- Use a futuristic font for a space vibe -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: 'Orbitron', sans-serif;
+      }
+      /* Info panel for planet details */
+      #planet-info {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 8px;
+        display: none;
+        z-index: 10;
+        font-size: 14px;
+      }
+      /* Container for controls */
+      #controls {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      /* Orbit toggle styling */
+      #orbit-switch {
+        background: rgba(20, 20, 30, 0.8);
+        padding: 10px 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 0 10px rgba(100, 100, 255, 0.5);
+      }
+      #orbit-switch label {
+        color: #fff;
+        margin-right: 5px;
+        font-size: 14px;
+      }
+      #toggle-orbits {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #0ff;
+      }
+      /* Movement button styling */
+      .toggle-button {
+        background: linear-gradient(45deg, #1e1e2f, #2a2a3d);
+        color: #0ff;
+        border: 2px solid #0ff;
+        padding: 10px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 14px;
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        transition: all 0.3s ease;
+      }
+      .toggle-button:hover {
+        background: linear-gradient(45deg, #2a2a3d, #1e1e2f);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+      }
+      #movement-switch {
+        background: rgba(20, 20, 30, 0.8);
+        padding: 10px 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 0 10px rgba(100, 100, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="planet-info"></div>
+    <div id="controls">
+      <div id="orbit-switch">
+        <label for="toggle-orbits">Show Orbits:</label>
+        <input type="checkbox" id="toggle-orbits" checked />
+      </div>
+      <div id="movement-switch">
+        <button id="toggle-movement" class="toggle-button">
+          Stop Movement
+        </button>
+      </div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
