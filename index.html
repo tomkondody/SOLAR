@@ -83,6 +83,36 @@
         align-items: center;
         box-shadow: 0 0 10px rgba(100, 100, 255, 0.5);
       }
+      #chat-box {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #0ff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  z-index: 20;
+}
+
+#chat-content {
+  flex: 1;
+  overflow-y: auto;
+  color: white;
+  font-size: 14px;
+}
+
+#chat-input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
     </style>
   </head>
   <body>
@@ -99,5 +129,11 @@
       </div>
     </div>
     <script type="module" src="./src/main.js"></script>
+<!-- Add this inside your HTML's body -->
+<div id="chat-box" style="display: none;">
+  <div id="chat-content"></div>
+  <input type="text" id="chat-input" placeholder="Type your message..." />
+  <button id="chat-send">Send</button>
+</div>
   </body>
 </html>

@@ -23,6 +23,10 @@ renderer.toneMappingExposure = 1.5;
 // VERY IMPORTANT: Set output encoding to sRGB so that textures show their proper colors.
 renderer.outputEncoding = THREE.sRGBEncoding;
 document.body.appendChild(renderer.domElement);
+const chatBox = document.getElementById("chat-box");
+const chatContent = document.getElementById("chat-content");
+const chatInput = document.getElementById("chat-input");
+const chatSend = document.getElementById("chat-send");
 
 // ----------------------------------------------------------------
 // LIGHTING
@@ -152,6 +156,16 @@ planetData.forEach((data) => {
   orbitLines.push(orbitLine);
   scene.add(orbitLine);
 });
+const planetChats = {
+  Mercury: "I'm the fastest planet around the Sun!",
+  Venus: "They call me Earth's twin.",
+  Earth: "Hello, fellow human! You know me well.",
+  Mars: "The Red Planet, waiting for your visit someday!",
+  Jupiter: "I'm the largest planet—King of the Solar System.",
+  Saturn: "My rings are my crown jewel. Aren’t they stunning?",
+  Uranus: "An ice giant spinning on its side. Quite unique, huh?",
+  Neptune: "The windiest planet—you better hold on tight!",
+};
 
 // ----------------------------------------------------------------
 // CONTROLS: Orbit & Navigation
@@ -185,14 +199,32 @@ window.addEventListener("click", (event) => {
   
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(planets);
-  
+
   if (intersects.length > 0) {
     const selectedPlanet = intersects[0].object;
-    planetInfo.style.display = "block";
-    planetInfo.innerHTML = `<strong>${selectedPlanet.name}</strong><br>Orbit Radius: ${selectedPlanet.orbit.radius}`;
-    zoomToPlanet(selectedPlanet);
+
+    // Show chat box
+    chatBox.style.display = "flex";
+
+    // Add initial message
+    chatContent.innerHTML = `<p>🌌 ${selectedPlanet.name}: Hello! I'm ${selectedPlanet.name}. Ask me something!</p>`;
+    chatInput.focus();
+
+    // Handle sending messages
+    chatSend.onclick = () => {
+      const userMessage = chatInput.value;
+      if (userMessage.trim()) {
+        chatContent.innerHTML += `<p>🧑‍🚀 You: ${userMessage}</p>`;
+        chatContent.innerHTML += `<p>🌌 ${selectedPlanet.name}: ${
+          planetChats[selectedPlanet.name] || "Nice to chat with you!"
+        }</p>`;
+        chatInput.value = ""; // Clear input
+        chatContent.scrollTop = chatContent.scrollHeight; // Scroll to the bottom
+      }
+    };
   }
 });
+
 
 function zoomToPlanet(planet) {
   const duration = 2; // seconds for the zoom transition
