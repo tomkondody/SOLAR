@@ -211,19 +211,46 @@ window.addEventListener("click", (event) => {
     chatInput.focus();
 
     // Handle sending messages
-    chatSend.onclick = () => {
-      const userMessage = chatInput.value;
+    chatSend.onclick = async () => {
+      const userMessage = chatInput.value; // Get the user's input
       if (userMessage.trim()) {
+        // Step 1: Display the user's message in the chat box
         chatContent.innerHTML += `<p>🧑‍🚀 You: ${userMessage}</p>`;
-        chatContent.innerHTML += `<p>🌌 ${selectedPlanet.name}: ${
-          planetChats[selectedPlanet.name] || "Nice to chat with you!"
-        }</p>`;
-        chatInput.value = ""; // Clear input
+    
+        try {
+          // Step 2: Send the message to the AI server
+          const response = await fetch("http://localhost:3000/ask-planet", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              message: userMessage, // User's input
+              planet: selectedPlanet.name, // Name of the clicked planet
+            }),
+          });
+    
+          // Step 3: Parse the server's response
+          const data = await response.json();
+          const aiResponse = data.response;
+    
+          // Step 4: Display the AI-generated response in the chat box
+          chatContent.innerHTML += `<p>🌌 ${selectedPlanet.name}: ${aiResponse}</p>`;
+        } catch (error) {
+          // Step 5: Handle errors (e.g., server issues)
+          console.error("Error communicating with the AI server:", error);
+          chatContent.innerHTML += `<p>🌌 ${selectedPlanet.name}: Sorry, I’m unable to respond right now.</p>`;
+        }
+    
+        // Clear the input box after sending the message
+        chatInput.value = "";
         chatContent.scrollTop = chatContent.scrollHeight; // Scroll to the bottom
       }
     };
   }
 });
+
+    
 
 
 function zoomToPlanet(planet) {
