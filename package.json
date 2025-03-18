@@ -1,14 +1,12 @@
 {
   "dependencies": {
+    "@google/generative-ai": "^0.24.0",
     "three": "^0.174.0"
   },
   "devDependencies": {
     "vite": "^6.2.2"
   },
-  
-    "scripts": {
-      "dev": "vite"
-    }
-  
-  
+  "scripts": {
+    "dev": "vite"
+  }
 }

@@ -26,13 +26,24 @@ app.post("/ask-planet", async (req, res) => {
 
   try {
     // Send the user's input and planet name to OpenAI GPT
-    const completion = await openai.completions.create({
-      model: "gpt-3.5-turbo-instruct", // Robust GPT model
-      prompt: `You are the planet ${planet}. Respond to this message: "${message}"`,
-      max_tokens: 150, // Limit the response length
-    });
+    // const completion = await openai.completions.create({
+    //   model: "gpt-3.5-turbo-instruct", // Robust GPT model
+    //   prompt: `You are the planet ${planet}. Respond to this message: "${message}"`,
+    //   max_tokens: 150, // Limit the response length
+    // });
+    const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-    const aiResponse = completion.choices[0].text.trim(); // Extract AI's reply
+const genAI = new GoogleGenerativeAI(process.env.OPENAI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+const prompt = `You are the planet ${planet}. Respond to this message: "${message}"`
+
+const result = await model.generateContent(prompt);
+console.log(result.response.text());
+
+    const aiResponse = result.response.text();
+
+    // const aiResponse = completion.choices[0].text.trim(); // Extract AI's reply
     res.json({ response: aiResponse }); // Send AI response back to the front-end
   } catch (error) {
     console.error(error); // Log any errors
