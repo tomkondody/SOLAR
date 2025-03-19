@@ -219,7 +219,7 @@ window.addEventListener("click", (event) => {
     
         try {
           // Step 2: Send the message to the AI server
-          const response = await fetch("http://localhost:3000/ask-planet", {
+          const response = await fetch("https://solar-elq9.onrender.com/ask-planet", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
