@@ -55,7 +55,7 @@ const textures = {
   saturn: loader.load('./textures/saturn.jpg'),
   uranus: loader.load('./textures/uranus.jpg'),
   neptune: loader.load('./textures/neptune.jpg'),
-  stars: loader.load('../textures/stars.jpg'),
+  stars: loader.load('/textures/stars.jpg'),
 };
 
 // Enable maximum anisotropic filtering and set each texture's encoding to sRGB
