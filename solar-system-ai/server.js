@@ -19,7 +19,12 @@ app.use(bodyParser.json());
 //   });
   const openai = new OpenAIApi({  apiKey: process.env.OPENAI_API_KEY}); // Pass the configuration to OpenAIApi
   
-
+app.get("/", (req, res) => {
+    res.json({
+      status: 200,
+      message: "API is working properly",
+    });
+  });
 // Route to handle AI requests
 app.post("/ask-planet", async (req, res) => {
   const { message, planet } = req.body; // Capture user message and planet name
@@ -33,13 +38,13 @@ app.post("/ask-planet", async (req, res) => {
     // });
     const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI(process.env.OPENAI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const genAI = new GoogleGenerativeAI(process.env.OPENAI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-const prompt = `You are the planet ${planet}. Respond to this message: "${message}"`
+    const prompt = `You are the planet ${planet}. Respond to this message: "${message}"`
 
-const result = await model.generateContent(prompt);
-console.log(result.response.text());
+    const result = await model.generateContent(prompt);
+    // console.log(result.response.text());
 
     const aiResponse = result.response.text();
 
