@@ -46,16 +46,16 @@ scene.add(sunlight);
 // ----------------------------------------------------------------
 const loader = new THREE.TextureLoader();
 const textures = {
-  sun: loader.load('../textures/sun.jpg'),
-  mercury: loader.load('../textures/mercury.jpg'),
-  venus: loader.load('../textures/venus.jpg'),
-  earth: loader.load('../textures/earth.jpg'),
-  mars: loader.load('../textures/mars.jpg'),
-  jupiter: loader.load('../textures/jupiter.jpg'),
-  saturn: loader.load('../textures/saturn.jpg'),
-  uranus: loader.load('../textures/uranus.jpg'),
-  neptune: loader.load('../textures/neptune.jpg'),
-  stars: loader.load('../textures/stars.jpg'),
+  sun: loader.load('./textures/sun.jpg'),
+  mercury: loader.load('./textures/mercury.jpg'),
+  venus: loader.load('./textures/venus.jpg'),
+  earth: loader.load('./textures/earth.jpg'),
+  mars: loader.load('./textures/mars.jpg'),
+  jupiter: loader.load('./textures/jupiter.jpg'),
+  saturn: loader.load('./textures/saturn.jpg'),
+  uranus: loader.load('./textures/uranus.jpg'),
+  neptune: loader.load('./textures/neptune.jpg'),
+  stars: loader.load('./textures/stars.jpg'),
 };
 
 // Enable maximum anisotropic filtering and set each texture's encoding to sRGB
